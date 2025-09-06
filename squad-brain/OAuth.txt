@@ -1,0 +1,51 @@
+OAuth 2.0 Theory - The Complete Flow
+What is OAuth?
+OAuth (Open Authorization) is a standard that allows users to log into your application using their existing accounts from other services (Google, GitHub, Facebook, etc.) without sharing their passwords with your app.
+Key Players in OAuth:
+
+Resource Owner - The user (person logging in)
+Client - Your Next.js application
+Authorization Server - Google/GitHub's OAuth server
+Resource Server - Google/GitHub's API that provides user data
+
+The OAuth Flow (Step by Step):
+Step 1: User Initiates Login
+
+User clicks "Continue with Google" on your app
+Your app redirects them to Google's authorization server
+
+Step 2: User Grants Permission
+
+Google shows a consent screen: "Allow YourApp to access your basic profile?"
+User clicks "Allow"
+
+Step 3: Authorization Code
+
+Google redirects user back to your app with an authorization code
+URL looks like: https://yourapp.com/callback?code=abc123
+
+Step 4: Exchange Code for Tokens
+
+Your app (server-side) exchanges the authorization code for:
+
+Access Token - Used to make API calls
+Refresh Token - Used to get new access tokens when they expire
+
+
+
+Step 5: Get User Information
+
+Your app uses the access token to call Google's API
+Gets user info (name, email, profile picture)
+
+Step 6: Create Session
+
+Your app creates a user account (if new) or logs them in
+Creates a session/JWT token for your app
+
+Why OAuth is Secure:
+
+Your app never sees the user's password
+Access tokens have limited permissions
+Tokens can expire and be revoked
+All communication happens over HTTPS
