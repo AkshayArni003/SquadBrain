@@ -13,8 +13,8 @@ export default function LoginPage() {
                 </div>
 
                 <div className="flex flex-col gap-4 w-full max-w-sm">
-                    <OAuthButton logo="/images/google.jpg">Continue with Google</OAuthButton>
-                    <OAuthButton logo="/images/github.png">Continue with GitHub</OAuthButton>
+                    <OAuthButton provider="google" logo="/images/google.jpg">Continue with Google</OAuthButton>
+                    <OAuthButton provider="github" logo="/images/github.png">Continue with GitHub</OAuthButton>
                 </div>
             </div>
         </>
