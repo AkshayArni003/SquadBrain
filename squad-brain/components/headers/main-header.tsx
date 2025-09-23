@@ -9,11 +9,7 @@ export default function MainHeader() {
 
     return (
         <header className={styles.header}>
-            <Link href="/" className={styles.logo}>
-                <Image src={logo} alt="Logo of squad brain" priority />
-                Squad Brain
-            </Link>
-            <LoginNav />
+            <button>Logout</button>
         </header >
     )
 }
