@@ -14,6 +14,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 response_type: "code"
             }
         }
-    }), Github]
+    }), Github],
+    callbacks: {
+        session({ session, user }) {
+            session.user.id = user.id
+            return session
+        },
+    }
 })
 

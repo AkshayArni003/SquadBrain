@@ -1,9 +1,15 @@
 import LogoutButton from "@/components/logout-button/logout-button";
+import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma"
+import { redirect } from "next/navigation";
 import Image from "next/image";
 
 
 export default async function DashboardPage() {
+    const session = await auth();
+    if (!session) {
+        redirect("/login");
+    }
     const users = await prisma.user.findMany({
         select: {
             id: true,

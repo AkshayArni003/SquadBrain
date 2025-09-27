@@ -16,8 +16,6 @@ export default function LoginPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 relative overflow-hidden">
-            <MainHeader />
-
             {/* Animated background circuit pattern */}
             <div className="fixed inset-0 opacity-10 pointer-events-none">
                 <svg className="w-full h-full" viewBox="0 0 100 100">
