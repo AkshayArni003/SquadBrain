@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import NextAuthProvider from "@/components/providers/session-provider";
-import MainHeader from "@/components/headers/main-header";
+import ConditionalHeader from "@/components/headers/conditional-header";
 
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function AuthRootLayout({
     return (
         <html lang="en">
             <body>
-                <MainHeader />
+                <ConditionalHeader />
                 {children}
             </body>
         </html>
