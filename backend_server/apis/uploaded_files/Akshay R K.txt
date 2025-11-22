@@ -1,6 +1,0 @@
-Yes, I’ve been actively using Cursor and VS Code with GitHub Copilot to plan, write, and refine code. I usually start by outlining implementation steps directly in the editor and let Copilot or Claude assist with boilerplate generation, function scaffolding, and unit tests. I also use agent mode in Cursor to debug, refactor, and auto-generate test cases or documentation. These tools have become a regular part of my workflow — especially for speeding up feature development and maintaining code consistency across projects.
-
-
-I use AI tools like Claude, Copilot, and Cursor daily in my workflow. They help me plan code structures, generate functions, write test cases, and review code faster. I also use them for debugging, improving code readability, and automating repetitive setup tasks. It’s become a habit to combine my own logic with AI suggestions to speed up delivery while keeping quality consistent.
-
-Yes, I’ve been using Claude Code mainly for research, debugging, and improving existing code. I often use it to explain logic, refactor functions, and generate unit tests or API documentation. It’s also helpful for quick prototyping and reviewing large code blocks before pushing updates.

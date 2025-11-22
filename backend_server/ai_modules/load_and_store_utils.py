@@ -1,10 +1,16 @@
 import os
 
+import dotenv
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
 ROOT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 VECTOR_DB_ROOT_DIRECTORY = os.path.join(ROOT_DIRECTORY, "ChromaDB")
+dotenv.load_dotenv()
+OPENAI_API_KEY = os.getenv("OPEN_AI_API_KEY")
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+openai_ef = OpenAIEmbeddings(model="text-embedding-3-small")
+
 def check_vector_store_exists():
     """
     Check if the vector store exists in the specified directory.
@@ -29,11 +35,11 @@ def store_vector_embeddings(embedded_documents):
     try:
         if check_vector_store_exists():
             print("Vector store exists. Loading existing store...")
-            vector_store = Chroma(persist_directory=VECTOR_DB_ROOT_DIRECTORY, embedding_function=OllamaEmbeddings(model="gemma:2b"))
+            vector_store = Chroma(persist_directory=VECTOR_DB_ROOT_DIRECTORY, embedding_function=openai_ef)
             vector_store.add_documents(embedded_documents)
         else:
             print("Creating new vector store...")
-            vector_store = Chroma.from_documents(embedded_documents, persist_directory=VECTOR_DB_ROOT_DIRECTORY, embedding=OllamaEmbeddings(model="gemma:2b"))
+            vector_store = Chroma.from_documents(embedded_documents, persist_directory=VECTOR_DB_ROOT_DIRECTORY, embedding=openai_ef)
         return True
     except Exception as e:
         print(f"Error storing vector embeddings: {e}")
