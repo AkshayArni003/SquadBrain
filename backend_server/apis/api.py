@@ -3,6 +3,7 @@ from typing import Optional
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import JSONResponse, StreamingResponse
 from backend_server.ai_modules.load_and_store_data import load_and_store_data
+from backend_server.ai_modules.squadBrain_llm import get_answer_from_squadbrain
 
 app = FastAPI()
 root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -43,5 +44,9 @@ async def upload_file(file: Optional[UploadFile] = File(None), url: Optional[str
     return JSONResponse(status_code=200, content={"message": f"Successfully uploaded and stored {file.filename if file else url}"})
 
 # Chat streaming end point
-# @app.get("/v1/chat/stream")
-# async def chat_stream(query: str):
+@app.get("/v1/chat-stream")
+async def chat_stream(query: str):
+    async def event_generator():
+        async for chunk in get_answer_from_squadbrain(query):
+            yield chunk
+    return StreamingResponse(event_generator(), media_type="text/event-stream")

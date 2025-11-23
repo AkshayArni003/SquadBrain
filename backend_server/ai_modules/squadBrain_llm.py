@@ -34,12 +34,11 @@ def prompt_with_context(request: ModelRequest) -> str:
     return system_message
 agent = create_agent(model, tools=[], middleware=[prompt_with_context])
 
-while True:
-    query = input("Enter your query (or 'exit' to quit): ")
-    if query.lower() == 'exit':
-        break
-    for step in agent.stream(
+async def get_answer_from_squadbrain(query: str):
+    for token, metadata in agent.stream(
         {"messages": [{"role": "user", "content": query}]},
-        stream_mode="values",
+        stream_mode="messages",
     ):
-        step["messages"][-1].pretty_print()
+        if token.content_blocks:
+            text = token.content_blocks[-1]["text"]
+            yield text
