@@ -17,6 +17,7 @@ model User {
     sessions      Session[]
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
+    projects      Project[]
 }
 
 model Account {
@@ -57,4 +58,14 @@ model VerificationToken {
 
     @@unique([identifier, token])
     @@map("verification_tokens")
+}
+
+model Project {
+    id          String   @id @default(cuid())
+    name        String
+    description String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    creatorId   String
+    creator     User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
 }

@@ -7,6 +7,5 @@ export default async function DashboardPage() {
     if (!session) {
         redirect("/login");
     }
-
-    return <DashboardLayout />;
+    return <DashboardLayout userSession={session} />
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Sidebar from "./sidebar";
 import ProjectsSection from "./projects-section";
 import ChatSection from "./chat-section";
@@ -8,7 +8,7 @@ import { Menu } from "lucide-react";
 
 type SidebarSection = "projects" | "chat" ;
 
-export default function DashboardLayout() {
+export default function DashboardLayout(userSession: any) {
     const [activeSection, setActiveSection] = useState<SidebarSection>("projects");
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -33,7 +33,7 @@ export default function DashboardLayout() {
                 >
                     <Menu className="w-6 h-6" />
                 </button>
-                {activeSection === "projects" && <ProjectsSection />}
+                {activeSection === "projects" && <ProjectsSection userSession={userSession.userSession} />}
                 {activeSection === "chat" && <ChatSection />}
             </main>
         </div>
