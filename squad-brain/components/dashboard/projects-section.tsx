@@ -32,14 +32,52 @@ export default function ProjectsSection(userSession: any) {
                 <ProjectsGridSection projects={projects} props={{ flag: refreshFlag, setFlag: setRefreshFlag, showProjectDetails: setShowProjectDetails }} />
             </div>
             {showProjectDetails && (
-                <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-slate-900 p-6 rounded-lg w-96">
-                        <h3 className="text-lg font-semibold text-white mb-4">Project Details</h3>
-                        {/* Project details content goes here */}
-                        <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer" onClick={() => setShowProjectDetails(false)}>Close</button>
-                    </div>
-                </div>
-            )}
+  <div className="
+    fixed top-0 right-0 bottom-0
+    left-0 lg:left-64
+    bg-slate-900 text-white
+    z-40 overflow-y-auto
+  ">
+    {/* Header */}
+    <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700 sticky top-0 bg-slate-900 z-10">
+      <h3 className="text-xl font-semibold">Project Dashboard</h3>
+      <div className="flex items-center gap-3">
+        <button
+        className="px-4 py-2 bg-amber-600 rounded-lg hover:bg-yellow-500 transition"
+      >Upload</button>
+      <button
+        onClick={() => setShowProjectDetails(false)}
+        className="px-4 py-2 bg-red-600 rounded-lg hover:bg-red-700 transition"
+      >
+        Close
+      </button>
+
+      </div>
+      
+    </div>
+
+    {/* Dashboard Content */}
+    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="bg-slate-800 rounded-lg p-4">
+        <h4 className="font-semibold mb-2">Project Id</h4>
+        <p className="text-slate-300">Id: </p>
+      </div>
+
+      <div className="bg-slate-800 rounded-lg p-4">
+        <h4 className="font-semibold mb-2">Project Summary</h4>
+        <p className="text-slate-300">Description: </p>
+      </div>
+
+      <div className="bg-slate-800 rounded-lg p-4">
+        <h4 className="font-semibold mb-2">account login details:</h4>
+        <p className="text-slate-300">created time: </p>
+        
+      </div>
+    </div>
+  </div>
+)}
+
+
         </>
     );
 }
