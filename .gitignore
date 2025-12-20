@@ -5,3 +5,5 @@
 ./backend_server/ai_modules/__pycache__/
 ./backend_server/apis/__pycache__/  
 ./backend_server/api/uploaded_files
+./prisma/migrations/
+/node_modules/
