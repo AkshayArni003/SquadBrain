@@ -2,11 +2,11 @@
 
 import { Suspense, useState } from "react";
 import Sidebar from "./sidebar";
-import ProjectsSection from "./projects-section";
+import ProjectsSection from "../projects/projects-section";
 import ChatSection from "./chat-section";
 import { Menu } from "lucide-react";
 
-type SidebarSection = "projects" | "chat" ;
+type SidebarSection = "projects" | "chat";
 
 export default function DashboardLayout(userSession: any) {
     const [activeSection, setActiveSection] = useState<SidebarSection>("projects");
@@ -19,8 +19,8 @@ export default function DashboardLayout(userSession: any) {
 
     return (
         <div className="flex h-screen bg-slate-950 overflow-hidden">
-            <Sidebar 
-                activeSection={activeSection} 
+            <Sidebar
+                activeSection={activeSection}
                 onSectionChange={handleSectionChange}
                 isOpen={isSidebarOpen}
                 onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
