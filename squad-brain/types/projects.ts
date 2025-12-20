@@ -4,6 +4,7 @@ declare module 'projects' {
         name: string;
         description: string;
         creatorId: string;
+        creatorName: string
     }
     interface ProjectsGridSectionProps {
         projects: Array<Projects>;

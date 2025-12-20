@@ -35,7 +35,7 @@ export default function ProjectDetails({ project }: { project: Projects | null }
                         </div>
                         <div>
                             <div>Owner</div>
-                            <p className="font-normal">{project?.creatorId}</p>
+                            <p className="font-normal">{project?.creatorName}</p>
                         </div>
                     </div>
                 </div>
