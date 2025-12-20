@@ -23,7 +23,6 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const creatorId = searchParams.get('creatorId');
-    console.log('Fetching projects for creatorId:', creatorId);
     const where = creatorId ? { creatorId } : undefined;
     const projects = await prisma.project.findMany({
         where
