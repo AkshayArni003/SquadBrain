@@ -46,6 +46,18 @@ CREATE TABLE "SCHEMA"."verification_tokens" (
     "expires" TIMESTAMP(3) NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "SCHEMA"."Project" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "creatorId" TEXT NOT NULL,
+
+    CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "SCHEMA"."User"("email");
 
@@ -55,8 +67,14 @@ CREATE UNIQUE INDEX "Session_sessionToken_key" ON "SCHEMA"."Session"("sessionTok
 -- CreateIndex
 CREATE UNIQUE INDEX "verification_tokens_identifier_token_key" ON "SCHEMA"."verification_tokens"("identifier", "token");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Project_name_key" ON "SCHEMA"."Project"("name");
+
 -- AddForeignKey
 ALTER TABLE "SCHEMA"."Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "SCHEMA"."User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SCHEMA"."Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "SCHEMA"."User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SCHEMA"."Project" ADD CONSTRAINT "Project_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES "SCHEMA"."User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
