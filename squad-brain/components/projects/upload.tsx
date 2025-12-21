@@ -1,9 +1,21 @@
 import { useState } from "react";
-export default function Upload({ upload }: { upload: React.Dispatch<React.SetStateAction<boolean>> }) {
+import { uploadFiles } from "../../lib/projectSectionApiHandler";
+
+export default function Upload({ upload, projectId }: { upload: React.Dispatch<React.SetStateAction<boolean>>; projectId: string }) {
     const [files, setFiles] = useState<FileList | null>(null);
+    const [sizeError, setSizeError] = useState<boolean>(false);
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(files)
+        if (files) {
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > 10 * 1024 * 1024) { // 10 MB limit
+                    setSizeError(true);
+                    return;
+                }
+            }
+            setSizeError(false);
+            uploadFiles(files, projectId, upload);
+        }
     }
     return (
         <div className="fixed top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -18,6 +30,7 @@ export default function Upload({ upload }: { upload: React.Dispatch<React.SetSta
                         <button type="button" className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors cursor-pointer" onClick={() => upload(false)}>Cancel</button>
                         <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer" disabled={!files}>Upload</button>
                     </div>
+                    {sizeError && <p className="text-red-500 text-sm mt-2">One or more files exceed the 10 MB size limit.</p>}
                 </form>
             </div>
         </div>

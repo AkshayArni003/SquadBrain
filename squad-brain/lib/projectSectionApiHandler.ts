@@ -20,3 +20,18 @@ export const deleteProject = async (projectId: string, setRefreshFlag: any, setI
     setRefreshFlag(!refreshFlag);
     setIsDeleteModalOpen(false);
 }
+
+export const uploadFiles = async (files: FileList, projectId: string, setUpload: any) => {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append('file', files[i]);
+    }
+    formData.append('projectId', projectId);
+    const response = await fetch(`/api/projects/file-uploads`, {
+        method: 'POST',
+        body: formData,
+    });
+    if (response.ok) {
+        setUpload(false);
+    }
+}
