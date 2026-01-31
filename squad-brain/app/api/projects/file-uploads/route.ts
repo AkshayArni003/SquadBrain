@@ -3,6 +3,7 @@ import fs from "fs/promises";
 
 import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
+import publishToStream from "./stream";
 
 export async function POST(req: NextRequest) {
     try {
@@ -30,7 +31,12 @@ export async function POST(req: NextRequest) {
         }
         await prisma.documents.createMany({
             data: fileNames,
-        })
+        });
+        //Publish to stream
+        //Future update with different stream names or queue names based on user or organization
+        const streamConfig = { streamName: "file_ingest" }
+        const streamMessage = { id: "", files: fileNames }
+        publishToStream(streamConfig, streamMessage);
         return NextResponse.json(
             { message: "File(s) uploaded successfully" },
             { status: 200 });

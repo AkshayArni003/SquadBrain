@@ -11,7 +11,8 @@ declare module 'projects' {
         props: {
             flag: boolean;
             setFlag: React.Dispatch<React.SetStateAction<boolean>>;
-            showProjectDetails: React.Dispatch<React.SetStateAction<{ show: boolean; project: Projects | null }>>;
+            showProjectDetails: React.Dispatch<React.SetStateAction<boolean>>;
+            selectedProject: React.Dispatch<React.SetStateAction<Projects>>;
         };
     }
 }

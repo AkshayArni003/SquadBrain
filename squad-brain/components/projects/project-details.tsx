@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../common-components/tableView";
 import { Projects } from "projects";
 import Upload from "./upload";
-import Link from "next/link";
 
-export default function ProjectDetails({ project }: { project: Projects }) {
+export default function ProjectDetails({ project, showProject }: { project: Projects, showProject: React.Dispatch<React.SetStateAction<boolean>> }) {
     const [isUpload, setIsUpload] = useState(false);
     const [projectFiles, setProjectFiles] = useState<Array<any>>([]);
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function ProjectDetails({ project }: { project: Projects }) {
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700 sticky top-0 bg-slate-900 z-10">
                 <svg className="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"
-                    onClick={() => <Link href="/dashboard" />}>
+                    onClick={() => showProject(false)}>
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
                 </svg>
                 <h3 className="text-xl font-semibold">Project Details</h3>

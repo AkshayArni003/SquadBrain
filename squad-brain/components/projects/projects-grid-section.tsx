@@ -25,7 +25,10 @@ export default function ProjectsGridSection({ projects, props }: ProjectsGridSec
                         <div
                             key={project.id}
                             className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-blue-600 transition-colors cursor-pointer"
-                            onClick={() => { props.showProjectDetails({ show: true, project }); }}
+                            onClick={() => {
+                                props.showProjectDetails(true);
+                                props.selectedProject(project)
+                            }}
                         >
                             <div className="flex items-start justify-between mb-3">
                                 <h3 className="text-lg font-semibold text-white">{project.name}</h3>
